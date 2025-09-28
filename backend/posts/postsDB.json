@@ -1,0 +1,9 @@
+{
+  "posts": [
+    {
+      "_id": "f67aba92-8e7e-4d3c-a4ff-b07e02820186",
+      "title": "Learn about microservices",
+      "content": "The microservice means the services run indivually"
+    }
+  ]
+}
