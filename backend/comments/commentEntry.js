@@ -9,12 +9,12 @@ const uuid = require('uuid');
 // Lowdb setup
 const low = require('lowdb');
 const jsonFile = require('lowdb/node');
-const db = new low.Low(new jsonFile.JSONFile('commentsDB.json'),null);
+const db = new low.Low(new jsonFile.JSONFile('commentsDB.json'), {});
 
 async function initializeDB() {
   await db.read();
   if (!db.data) {
-    db.data = { comments: [] };
+    db.data = { comments: [] }; // FIX: initialize with array
     await db.write();
   }
 }
@@ -26,7 +26,7 @@ app.use(cors());
 
 // GET /comments - get all comments
 app.get('/comments', async (req, res) => {
-  await db.read(); // make sure to load latest data
+  await db.read(); // load latest data
   res.send(db.data.comments);
 });
 
