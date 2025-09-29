@@ -9,7 +9,7 @@ const uuid = require('uuid');
 // Lowdb setup
 const low = require('lowdb');
 const jsonFile = require('lowdb/node');
-const db = new low.Low(new jsonFile.JSONFile('commentsDB.json'), {});
+const db = new low.Low(new jsonFile.JSONFile('commentsDB.json'), null);
 
 async function initializeDB() {
   await db.read();
@@ -32,10 +32,10 @@ app.get('/comments', async (req, res) => {
 
 // POST /comments - add a new comment
 app.post('/comments', async (req, res) => {
-  const { postId, content } = req.body;
+  const { postId, comment } = req.body;
   await db.read();
 
-  db.data.comments.push({ _id: uuid.v4(), postId, content });
+  db.data.comments.push({ _id: uuid.v4(), postId, comment });
   await db.write();
 
   res.send(db.data.comments);
